@@ -1,0 +1,63 @@
+{
+  "services": [
+    {
+      "type": "web",
+      "name": "fivem-discord-bot",
+      "env": "node",
+      "plan": "free",
+      "buildCommand": "npm install",
+      "startCommand": "node index.js",
+      "repo": "https://github.com/VOTRE-USERNAME/fivem-discord-bot.git",
+      "envVars": [
+        {
+          "key": "NODE_ENV",
+          "value": "production"
+        },
+        {
+          "key": "DISCORD_BOT_TOKEN",
+          "generateValue": false
+        },
+        {
+          "key": "DISCORD_GUILD_ID", 
+          "generateValue": false
+        },
+        {
+          "key": "WHITELIST_ROLE_ID",
+          "value": "1351613530813497377"
+        },
+        {
+          "key": "NON_WHITELIST_ROLE_ID",
+          "value": "1351651570265100430"
+        },
+        {
+          "key": "MODERATOR_ROLE_ID",
+          "value": "1362514672829599947"
+        },
+        {
+          "key": "ADMIN_ROLE_ID",
+          "value": "1351613530914164913,1351613530956103705,1351613530956103704"
+        },
+        {
+          "key": "SUPPORT_ROLE_ID",
+          "value": "1351613530876678324"
+        },
+        {
+          "key": "WL_ANNOUNCEMENT_CHANNEL_ID",
+          "value": "1351651405131157566"
+        },
+        {
+          "key": "WL_CHANNEL_ID",
+          "value": "1351653410750861322"
+        }
+      ]
+    }
+  ],
+  "databases": [
+    {
+      "name": "fivem-bot-db",
+      "databaseName": "fivem_bot",
+      "user": "fivem_user",
+      "plan": "free"
+    }
+  ]
+}

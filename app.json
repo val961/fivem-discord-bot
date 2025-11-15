@@ -1,0 +1,66 @@
+{
+  "name": "FiveM Discord Bot",
+  "description": "Bot Discord complet pour serveur FiveM avec gestion whitelist et commandes admin",
+  "repository": "https://github.com/votre-username/fivem-discord-bot",
+  "logo": "https://cdn.discordapp.com/attachments/123456789/logo.png",
+  "keywords": ["discord", "bot", "fivem", "whitelist", "roleplay"],
+  "image": "heroku/nodejs",
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ],
+  "formation": {
+    "worker": {
+      "quantity": 1,
+      "size": "free"
+    }
+  },
+  "addons": [
+    {
+      "plan": "jawsdb:kitefin"
+    }
+  ],
+  "env": {
+    "DISCORD_BOT_TOKEN": {
+      "description": "Token de votre bot Discord",
+      "required": true
+    },
+    "DISCORD_GUILD_ID": {
+      "description": "ID de votre serveur Discord",
+      "required": true
+    },
+    "WHITELIST_ROLE_ID": {
+      "description": "ID du rôle whitelist",
+      "value": "1351613530813497377"
+    },
+    "NON_WHITELIST_ROLE_ID": {
+      "description": "ID du rôle non-whitelist",
+      "value": "1351651570265100430"
+    },
+    "MODERATOR_ROLE_ID": {
+      "description": "ID du rôle modérateur",
+      "value": "1362514672829599947"
+    },
+    "ADMIN_ROLE_ID": {
+      "description": "IDs des rôles admin (séparés par virgules)",
+      "value": "1351613530914164913,1351613530956103705,1351613530956103704"
+    },
+    "SUPPORT_ROLE_ID": {
+      "description": "ID du rôle support",
+      "value": "1351613530876678324"
+    },
+    "WL_ANNOUNCEMENT_CHANNEL_ID": {
+      "description": "ID du channel d'annonce whitelist",
+      "value": "1351651405131157566"
+    },
+    "WL_CHANNEL_ID": {
+      "description": "ID du channel whitelist",
+      "value": "1351653410750861322"
+    },
+    "NODE_ENV": {
+      "description": "Environment Node.js",
+      "value": "production"
+    }
+  }
+}
