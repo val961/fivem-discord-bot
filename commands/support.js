@@ -47,19 +47,19 @@ async function handleOpenWLCommand(interaction) {
             [PermissionFlagsBits.AttachFiles]: true
         });
 
-        // Message d'annonce
-        const announcementEmbed = new EmbedBuilder()
-            .setTitle('🟢 WHITELIST OUVERTE')
-            .setDescription('Les candidatures pour la whitelist sont maintenant **OUVERTES** !\n\n📝 Vous pouvez maintenant postuler dans le salon :\n• <#' + process.env.WL_CHANNEL_ID + '>')
-            .setColor(0x00FF00)
-            .setTimestamp();
-
-        // Envoyer le message d'annonce si le channel existe
-        if (announcementChannel) {
-            await announcementChannel.send({ 
-                content: '@everyone',
-                embeds: [announcementEmbed] 
+        // Ouvrir le salon vocal WL si configuré
+        const wlVoiceChannel = guild.channels.cache.get(process.env.WL_VOICE_CHANNEL_ID);
+        if (wlVoiceChannel) {
+            await wlVoiceChannel.permissionOverwrites.edit(guild.roles.everyone, {
+                [PermissionFlagsBits.ViewChannel]: true,
+                [PermissionFlagsBits.Connect]: true,
+                [PermissionFlagsBits.Speak]: true
             });
+        }
+
+        // Message d'annonce simple
+        if (announcementChannel) {
+            await announcementChannel.send('@everyone\n🟢 **Les WL sont ON**');
         }
 
         // Réponse à la commande
@@ -106,19 +106,19 @@ async function handleCloseWLCommand(interaction) {
             [PermissionFlagsBits.AttachFiles]: false
         });
 
-        // Message d'annonce
-        const announcementEmbed = new EmbedBuilder()
-            .setTitle('🔴 WHITELIST FERMÉE')
-            .setDescription('Les candidatures pour la whitelist sont maintenant **FERMÉES** !\n\n❌ Le salon de candidature n\'est plus accessible.\n⏳ Restez à l\'écoute pour la prochaine ouverture.')
-            .setColor(0xFF0000)
-            .setTimestamp();
-
-        // Envoyer le message d'annonce si le channel existe
-        if (announcementChannel) {
-            await announcementChannel.send({ 
-                content: '@everyone',
-                embeds: [announcementEmbed] 
+        // Fermer le salon vocal WL si configuré
+        const wlVoiceChannel = guild.channels.cache.get(process.env.WL_VOICE_CHANNEL_ID);
+        if (wlVoiceChannel) {
+            await wlVoiceChannel.permissionOverwrites.edit(guild.roles.everyone, {
+                [PermissionFlagsBits.ViewChannel]: false,
+                [PermissionFlagsBits.Connect]: false,
+                [PermissionFlagsBits.Speak]: false
             });
+        }
+
+        // Message d'annonce simple
+        if (announcementChannel) {
+            await announcementChannel.send('@everyone\n🔴 **Les WL sont OFF**\nSurveillez les futures ⁠📣annonces-whitelist pour pouvoir tenter votre chance');
         }
 
         // Réponse à la commande
@@ -155,32 +155,33 @@ async function handleSetupWLCommand(interaction) {
             return interaction.reply({ embeds: [embed], ephemeral: true });
         }
 
-        // Message de setup de la whitelist
+        // Message de setup de la whitelist pour Acadia
         const setupEmbed = new EmbedBuilder()
-            .setTitle('📋 INFORMATIONS WHITELIST')
+            .setTitle('Bonjour à tous !')
             .setDescription(`
-**Bienvenue sur notre serveur FiveM !**
+🔮 **PROCHAINE SESSION DE WHITELIST** le Mardi 18 Novembre de 16h00 à 20h00
 
-Pour rejoindre notre communauté, vous devez passer par le processus de whitelist.
+**➜ Conditions pour passer sa WL :**
+• Avoir 17ans et +
+• Avoir un bon micro
+• Être sur PC et non sur téléphone portable
+• Avoir pris connaissance du 📋 règlement
+• Avoir une idée de votre background
+• Dans votre pseudo avoir [Job ou projet] devant votre nom et prénom RP
+*Exemple: [LSPD] Nom Prénom RP - [Ballas] Nom Prénom RP*
 
-**📝 Comment postuler :**
-• Attendez l'ouverture de la whitelist (annoncée ici)
-• Rendez-vous dans le salon de candidature
-• Remplissez le formulaire de candidature
-• Attendez la validation de votre dossier
+🟢 **Projet légal disponible :**
+• LSPD
+• EMS
+• Avocats
 
-**📋 Salon de candidature :**
-• <#${process.env.WL_CHANNEL_ID}>
-
-**⚠️ Règles importantes :**
-• Une seule candidature par personne
-• Respectez le format demandé
-• Soyez patient pour la réponse
-• Pas de relance en MP
-
-**🎮 Bonne chance à tous !**
+🟣 **Projet illégal disponible :**
+• Groupe Asiatique
+• F4L
+• Vagos
+• Groupe libre
             `)
-            .setColor(0x0099FF)
+            .setColor(0x7B68EE)
             .setThumbnail(guild.iconURL())
             .setTimestamp();
 
