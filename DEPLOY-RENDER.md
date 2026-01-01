@@ -19,23 +19,47 @@
 5. **Render détecte automatiquement** le fichier `render.yaml`
 6. **Cliquez "Create Web Service"**
 
-### **Étape 3 : Configuration Discord**
-Dans l'onglet **"Environment"** de votre service, ajoutez :
+### **Étape 3 : Configuration complète**
+Dans l'onglet **"Environment"** de votre service, ajoutez TOUTES ces variables :
 
 ```env
+# Discord
 DISCORD_BOT_TOKEN = votre_token_bot_discord
 DISCORD_GUILD_ID = votre_id_serveur_discord
+
+# Base de données MySQL (votre hébergeur)
+DB_HOST = 141.94.245.139
+DB_USER = u3527_kGQVT8BKh2
+DB_PASSWORD = G===ua0EiFf0.yq+RHxEjKF
+DB_NAME = s3527_ArcadiaV1
+
+# Rôles Discord (déjà configurés)
+WHITELIST_ROLE_ID = 1351613530813497377
+NON_WHITELIST_ROLE_ID = 1351651570265100430
+MODERATOR_ROLE_ID = 1362514672829599947
+ADMIN_ROLE_ID = 1351613530914164913,1351613530956103705,1351613530956103704
+SUPPORT_ROLE_ID = 1351613530876678324
+
+# Channels Discord (déjà configurés)
+WL_ANNOUNCEMENT_CHANNEL_ID = 1351651405131157566
+WL_CHANNEL_ID = 1351653410750861322
 ```
 
 **Comment récupérer ces valeurs :**
 - **TOKEN** : Discord Developer Portal → Votre app → Bot → Token
 - **GUILD_ID** : Clic droit sur votre serveur Discord → "Copier l'ID"
 
-### **Étape 4 : Base de données (Optionnel)**
-Si vous avez des données FiveM à importer :
-1. **Render Dashboard** → **"New +"** → **"PostgreSQL"**
-2. **Plan Free** (1GB gratuit)
-3. **Connectez à votre service** via les variables d'environnement
+**✅ Vos infos MySQL sont déjà remplies :**
+- **DB_HOST** : 141.94.245.139 ✓
+- **DB_USER** : u3527_kGQVT8BKh2 ✓
+- **DB_PASSWORD** : G===ua0EiFf0.yq+RHxEjKF ✓
+- **DB_NAME** : s3527_ArcadiaV1 ✓
+
+**✅ Avantages de cette méthode :**
+- Données FiveM en temps réel (compatible oxmysql)
+- Pas de synchronisation nécessaire
+- Économique (pas de base supplémentaire)
+- Commandes bot toujours à jour
 
 ---
 
